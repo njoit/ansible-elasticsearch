@@ -1,0 +1,10 @@
+---
+  
+- name: Install plugins
+  shell: "sudo {{ logserver_home }}/elasticsearch-{{ elasticsearch_version }}/bin/plugin install {{ item }}"
+  with_items: plugins
+  register: plugins_installed
+  changed_when: "'Installed' in plugins_installed.stdout"
+  failed_when: "plugins_installed.rc != 0 and plugins_installed.stdout.find('already exists. To update the plugin') == -1"
+
+#- debug: var=installed_plugins
