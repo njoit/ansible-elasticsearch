@@ -1,0 +1,16 @@
+---
+# handlers file for ansible-elasticsearch
+
+- name: restart elasticsearch
+  sudo: false
+  service:
+    name: elasticsearch
+    state: restarted
+    enabled: yes
+
+- name: start elasticsearch
+  sudo: false
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes
