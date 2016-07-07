@@ -15,8 +15,8 @@ ES_HOME={{ logserver_home }}/elasticsearch-{{ elasticsearch_version }}
 DAEMON=$ES_HOME/bin/elasticsearch
 NAME=elasticsearch
 DESC=elasticsearch
-DAEMON_OPTS="-d -p $PID_FILE"
 PID_FILE=/var/run/$NAME/$NAME.pid
+DAEMON_OPTS="-d -p $PID_FILE"
 
 test -x $DAEMON || exit 0
 
