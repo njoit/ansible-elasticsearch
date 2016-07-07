@@ -1,0 +1,9 @@
+---
+
+- name: Install Elasticsearch as a service
+  template:
+    src: elasticsearch.j2
+    dest: /etc/init.d/elasticsearch
+    owner: root
+    group: root
+    mode: 0755
