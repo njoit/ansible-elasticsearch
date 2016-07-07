@@ -1,0 +1,16 @@
+---
+- name: add group "elasticsearch"
+  group: name={{ elasticsearch_group }} state=present
+
+- name: add user "elasticsearch"
+  user: name={{ elasticsearch_user }} shell=/bin/false group={{ elasticsearch_group }} createhome=no
+  sudo: True
+
+- name: make sure logserver home exists
+  file: path={{ logserver_home }} state=directory mode=0755
+
+- name: Download release
+  get_url: url={{download_url}} dest={{ logserver_home }} force=no
+
+- name: Extract elasticsearch archive to /opt/logserver
+  unarchive: src="{{ logserver_home }}/elasticsearch-{{elasticsearch_version}}.tar.gz" dest="{{ logserver_home }}" copy=no creates="{{ logserver_home }}/elasticsearch-{{elasticsearch_version}}" group={{ elasticsearch_group }} owner={{ user }}
